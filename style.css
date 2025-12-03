@@ -1,0 +1,216 @@
+/* ===========================================================
+   1995 Academic Aesthetic — φ-Structured Layout System
+   Computational Documents Laboratory
+   =========================================================== */
+
+/* --- Golden Ratio Variables -------------------------------- */
+
+:root {
+  --phi: 1.618;
+  --base: 8px;
+
+  /* spacing scales derived from φ */
+  --gap-sm: calc(var(--base) * (var(--phi) / 2));     /* ~6.5px */
+  --gap:    calc(var(--base) * var(--phi));           /* ~13px */
+  --gap-lg: calc(var(--base) * var(--phi) * var(--phi)); /* ~21px */
+}
+
+/* --- Global ------------------------------------------------ */
+
+body.theme-1995 {
+  margin: 0;
+  padding: 0;
+
+  /* Backdrop: subtle tiled grid, 1990s wallpaper style */
+  background-color: #808080;
+  background-image:
+    linear-gradient(90deg, #7a7a7a 0px, #7a7a7a 1px, #808080 1px, #808080 16px),
+    linear-gradient(#7a7a7a 0px, #7a7a7a 1px, #808080 1px, #808080 16px);
+  background-size: 16px 16px;
+
+  font-family: "Times New Roman", Times, serif;
+  color: #000000;
+}
+
+/* --- Links ------------------------------------------------- */
+
+a {
+  color: #000080;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Main Window Frame ------------------------------------ */
+
+.page-frame {
+  width: min(94vw, 960px);   /* centered, clearly framed */
+  max-width: 960px;
+
+  margin: var(--gap-lg) auto;
+  padding: var(--gap);
+
+  background: #c0c0c0;
+  border: 1px solid #000;
+
+  box-sizing: border-box;
+}
+
+/* --- Header ------------------------------------------------ */
+
+.site-header {
+  border-bottom: 1px solid #808080;
+  padding-bottom: var(--gap-sm);
+  margin-bottom: var(--gap);
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.tagline {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #202020;
+}
+
+/* --- Navigation Bar --------------------------------------- */
+
+.nav-bar {
+  margin-top: var(--gap-sm);
+  padding: 2px 4px;
+
+  background: #d4d0c8;
+  border: 1px solid #808080;
+
+  display: flex;
+  gap: var(--gap-sm);
+  flex-wrap: wrap;
+}
+
+.nav-bar a {
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+  font-size: 12px;
+  padding: 1px 6px;
+}
+
+.nav-bar a:hover {
+  background: #c0c0c0;
+  outline: 1px dotted #000;
+}
+
+/* --- Layouts ---------------------------------------------- */
+
+/* φ-structured two-column layout for the home page */
+.layout-golden {
+  display: flex;
+  gap: var(--gap);
+  align-items: flex-start;
+}
+
+/* 61.8% / 38.2% split */
+.primary-column   { flex: var(--phi); }
+.secondary-column { flex: 1; }
+.column { min-width: 0; }
+
+/* subpages are single column */
+.single-column {
+  display: block;
+}
+
+/* --- Panels ------------------------------------------------ */
+
+.panel {
+  margin-bottom: var(--gap-sm);
+  padding: var(--gap-sm);
+
+  background: #ddd8cf;
+  border: 1px solid #a0a0a0;
+}
+
+.panel h2 {
+  margin: 0 0 var(--gap-sm);
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #b0b0b0;
+  padding-bottom: var(--gap-sm);
+}
+
+.panel p {
+  margin: var(--gap-sm) 0;
+  font-size: 12px;
+}
+
+/* Lists: bullets inside so dots don’t spill into the gutter */
+.list-plain {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin: var(--gap-sm) 0;
+  padding-left: 0;
+  font-size: 12px;
+}
+
+.small { font-size: 11px; }
+.mono  { font-family: "Courier New", Courier, monospace; }
+
+/* --- Buttons ----------------------------------------------- */
+
+.button {
+  display: inline-block;
+  padding: 2px 10px;
+  margin-right: var(--gap-sm);
+
+  font-family: "MS Sans Serif", Tahoma, Arial, sans-serif;
+  font-size: 12px;
+
+  background: #d4d0c8;
+  color: #000;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+
+  cursor: pointer;
+}
+
+.button.primary {
+  font-weight: bold;
+}
+
+.button:hover {
+  background: #c0c0c0;
+}
+
+.button:active {
+  border-color: #808080 #ffffff #ffffff #808080;
+  background: #c0c0c0;
+}
+
+/* --- Footer ------------------------------------------------ */
+
+.site-footer {
+  margin-top: var(--gap);
+  padding-top: var(--gap-sm);
+
+  border-top: 1px solid #808080;
+  font-size: 10px;
+  text-align: right;
+}
+
+/* --- Responsive ------------------------------------------- */
+
+@media (max-width: 800px) {
+  .page-frame {
+    width: 100vw;
+    max-width: none;
+    margin: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .layout-golden {
+    flex-direction: column;
+  }
+}
